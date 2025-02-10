@@ -267,11 +267,24 @@ function moveMe() {
 
   // Global movement (fixedPlanet)
   const globalSpeed = 3;
-  let gOffX = 0, gOffY = 0;
+  let gOffX = 0, gOffY = 0; 
   if (keyIsDown(65)) { gOffX = -globalSpeed } // A
   if (keyIsDown(68)) { gOffX = globalSpeed }  // D
   if (keyIsDown(87)) { gOffY = -globalSpeed } // W
   if (keyIsDown(83)) { gOffY = globalSpeed }  // S
+
+  if (me.x <= 3 && me.globalX > 0 && localOffX < 0) {  
+    gOffX = -globalSpeed;
+  }
+  if (me.y <= 3 && me.globalY > 0 && localOffY < 0) {  
+    gOffY = -globalSpeed;
+  }
+  if (me.x >= 1197 && me.globalX < 2000 && localOffX > 0) {  
+    gOffX = +globalSpeed;
+  }
+  if (me.y >= 597 && me.globalY < 2000 && localOffY > 0) {  
+    gOffY = +globalSpeed;
+  }
 
   let xTemp = me.x;
   let yTemp = me.y;
@@ -297,7 +310,7 @@ function moveMe() {
     me.globalY = newGlobalY;
     me.x = xTemp;
     me.y = yTemp;
-  } 
+  }  
 
   fill('blue')
   mainCanvas.text("mX: " + int(mouseX) + " ,mY: " + int(mouseY) + ", x:" + int(me.x) + ", y: " + int(me.y) + " globalX: " + int(me.globalX) + " globalY: " + int(me.globalY), mouseX, mouseY);
